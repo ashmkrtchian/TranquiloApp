@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tranquilo — Your Personal Space for Calm</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --dark-green: #283618;
+    --milk: #FEFAE0;
+    --light-brown: #DDA15E;
+    --light-green: #606C38;
+    --caramel: #BC6C25;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--milk);
+    color: var(--dark-green);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(254,250,224,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(40,54,24,0.08);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600;
+    color: var(--dark-green);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 400;
+    color: var(--light-green); text-decoration: none;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--caramel); }
+  .nav-cta {
+    background: var(--dark-green); color: var(--milk);
+    padding: 10px 24px; border-radius: 100px;
+    font-size: 14px; font-weight: 400; text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--light-green); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-circles {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .hero-bg-circles span {
+    position: absolute; border-radius: 50%;
+    opacity: 0.07;
+    background: var(--light-green);
+    animation: floatCircle 12s ease-in-out infinite;
+  }
+  .hero-bg-circles span:nth-child(1) { width: 600px; height: 600px; top: -150px; left: -180px; animation-delay: 0s; }
+  .hero-bg-circles span:nth-child(2) { width: 400px; height: 400px; bottom: -100px; right: -100px; animation-delay: 3s; background: var(--caramel); }
+  .hero-bg-circles span:nth-child(3) { width: 260px; height: 260px; top: 40%; left: 60%; animation-delay: 6s; background: var(--light-brown); }
+  @keyframes floatCircle {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.04); }
+  }
+
+  .hero-eyebrow {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--caramel);
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 9vw, 110px);
+    font-weight: 300; line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--dark-green);
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--light-green);
+  }
+  .hero-sub {
+    max-width: 540px;
+    font-size: 17px; line-height: 1.7; font-weight: 300;
+    color: var(--light-green);
+    margin-bottom: 48px;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--dark-green); color: var(--milk);
+    padding: 16px 36px; border-radius: 100px;
+    font-size: 15px; font-weight: 400; text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(40,54,24,0.18);
+  }
+  .btn-primary:hover { background: var(--light-green); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(40,54,24,0.22); }
+  .btn-primary svg { width: 18px; height: 18px; fill: var(--milk); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1.5px solid var(--light-green); color: var(--dark-green);
+    padding: 16px 36px; border-radius: 100px;
+    font-size: 15px; font-weight: 400; text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { background: rgba(96,108,56,0.08); transform: translateY(-2px); }
+
+  .hero-scroll {
+    margin-top: 72px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+    color: var(--light-green); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 48px; background: var(--light-green);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TAGLINE STRIP ── */
+  .strip {
+    background: var(--dark-green);
+    padding: 20px 0;
+    overflow: hidden;
+  }
+  .strip-inner {
+    display: flex; gap: 60px;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  .strip-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 300; font-style: italic;
+    color: var(--milk); opacity: 0.75;
+    flex-shrink: 0;
+  }
+  .strip-dot { color: var(--light-brown); margin: 0 -20px; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 120px 60px;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-text .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--caramel); margin-bottom: 16px;
+  }
+  .about-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px); font-weight: 300; line-height: 1.15;
+    color: var(--dark-green); margin-bottom: 24px;
+  }
+  .about-text h2 em { font-style: italic; color: var(--light-green); }
+  .about-text p {
+    font-size: 16px; line-height: 1.8; color: var(--light-green);
+    margin-bottom: 16px;
+  }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid rgba(40,54,24,0.1);
+    border-radius: 20px; padding: 28px 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(40,54,24,0.1); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 600; line-height: 1;
+    color: var(--dark-green); margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--light-green); font-weight: 400; line-height: 1.4; }
+  .stat-card.accent { background: var(--dark-green); }
+  .stat-card.accent .stat-num { color: var(--milk); }
+  .stat-card.accent .stat-label { color: rgba(254,250,224,0.65); }
+
+  /* ── FEATURES ── */
+  .features { padding: 100px 60px; background: var(--dark-green); }
+  .features-header { text-align: center; margin-bottom: 72px; }
+  .features-header .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--light-brown); margin-bottom: 16px;
+  }
+  .features-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px); font-weight: 300;
+    color: var(--milk); line-height: 1.15;
+  }
+  .features-header h2 em { font-style: italic; color: var(--light-brown); }
+
+  .features-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .feature-card {
+    background: rgba(254,250,224,0.05);
+    border: 1px solid rgba(254,250,224,0.1);
+    border-radius: 24px; padding: 36px 32px;
+    transition: background 0.25s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--light-brown), var(--caramel));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .feature-card:hover { background: rgba(254,250,224,0.09); transform: translateY(-4px); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.15em;
+    color: var(--light-brown); margin-bottom: 20px; display: block;
+  }
+  .feature-icon {
+    width: 48px; height: 48px; margin-bottom: 20px;
+    background: rgba(221,161,94,0.15);
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  }
+  .feature-icon svg { width: 24px; height: 24px; }
+  .feature-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 400; color: var(--milk);
+    margin-bottom: 12px; line-height: 1.2;
+  }
+  .feature-card p { font-size: 14px; line-height: 1.75; color: rgba(254,250,224,0.6); }
+  .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .feature-tag {
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 100px;
+    border: 1px solid rgba(221,161,94,0.3); color: var(--light-brown);
+  }
+
+  /* ── HOW IT WORKS ── */
+  .how { padding: 120px 60px; max-width: 1100px; margin: 0 auto; }
+  .how-header { margin-bottom: 72px; }
+  .how-header .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--caramel); margin-bottom: 16px;
+  }
+  .how-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px); font-weight: 300; line-height: 1.15;
+    color: var(--dark-green);
+  }
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: grid; grid-template-columns: 80px 1fr; gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(40,54,24,0.1);
+    align-items: start;
+    transition: background 0.2s;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; color: rgba(40,54,24,0.15);
+    line-height: 1;
+  }
+  .step-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 400; color: var(--dark-green);
+    margin-bottom: 8px;
+  }
+  .step-content p { font-size: 15px; line-height: 1.7; color: var(--light-green); }
+
+  /* ── CTA ── */
+  .cta-section {
+    margin: 0 60px 100px;
+    background: var(--light-green);
+    border-radius: 32px;
+    padding: 80px 60px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: 'Tranquilo';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px; font-weight: 600; font-style: italic;
+    color: rgba(40,54,24,0.08);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    white-space: nowrap; pointer-events: none;
+  }
+  .cta-section .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--light-brown); margin-bottom: 20px;
+  }
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px); font-weight: 300;
+    color: var(--milk); line-height: 1.1; margin-bottom: 20px;
+  }
+  .cta-section h2 em { font-style: italic; }
+  .cta-section p { font-size: 17px; color: rgba(254,250,224,0.75); margin-bottom: 44px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-section .btn-download {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--milk); color: var(--dark-green);
+    padding: 18px 44px; border-radius: 100px;
+    font-size: 16px; font-weight: 500; text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+  }
+  .cta-section .btn-download:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+  .cta-section .btn-download svg { width: 20px; height: 20px; fill: var(--dark-green); }
+  .android-note {
+    margin-top: 16px; font-size: 13px; color: rgba(254,250,224,0.5);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark-green); color: var(--milk);
+    padding: 60px 60px 40px;
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 48px; padding-bottom: 48px;
+    border-bottom: 1px solid rgba(254,250,224,0.1);
+  }
+  .footer-brand .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 600; color: var(--milk);
+    letter-spacing: 0.04em; margin-bottom: 10px;
+  }
+  .footer-brand p { font-size: 14px; color: rgba(254,250,224,0.45); max-width: 260px; line-height: 1.6; }
+  .footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; font-weight: 300;
+    color: rgba(254,250,224,0.5); max-width: 320px; line-height: 1.5; text-align: right;
+  }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: rgba(254,250,224,0.3);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .features { padding: 80px 24px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .how { padding: 80px 24px; }
+    .cta-section { margin: 0 24px 80px; padding: 60px 32px; }
+    footer { padding: 48px 24px 32px; }
+    .footer-top { flex-direction: column; gap: 32px; }
+    .footer-quote { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 100px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Tranquilo</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+  </ul>
+  <a href="https://www.dropbox.com/scl/fi/t2i1hdzg1o9lihc56wdy6/Tranquilo.apk?rlkey=vfedwl0rucpyxfl76k4mg202i&st=ykf4oltg&dl=1" class="nav-cta">Download APK</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circles">
+    <span></span><span></span><span></span>
+  </div>
+  <p class="hero-eyebrow">Android App · Free · No Subscriptions</p>
+  <h1>Take a breath.<br/><em>Stay Tranquilo.</em></h1>
+  <p class="hero-sub">Your personal space for relaxation, focus, and mental clarity. Designed to help you unwind in a fast-paced world.</p>
+  <div class="hero-actions">
+    <a href="https://www.dropbox.com/scl/fi/t2i1hdzg1o9lihc56wdy6/Tranquilo.apk?rlkey=vfedwl0rucpyxfl76k4mg202i&st=ykf4oltg&dl=1" class="btn-primary">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.523 15.341l-.937-.937a5.498 5.498 0 001.16-3.404A5.5 5.5 0 0012.25 6a5.5 5.5 0 00-5.496 5 5.499 5.499 0 001.16 3.404l-.938.937A7 7 0 015.25 11a7 7 0 017-7 7 7 0 017 7 7 7 0 01-1.727 4.341zM12 22l-5-5h10l-5 5zm-1-8V8h2v6h-2z"/></svg>
+      Download for Android
+    </a>
+    <a href="#features" class="btn-secondary">Explore Features</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Breathing Exercises</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Mood Tracking</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Sleep Mode</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Armenian Poetry</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">CalmCoins</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Schulte Table</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Breathing Exercises</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Mood Tracking</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Sleep Mode</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Armenian Poetry</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">CalmCoins</span>
+    <span class="strip-item strip-dot">·</span>
+    <span class="strip-item">Schulte Table</span>
+    <span class="strip-item strip-dot">·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="background: var(--milk);">
+  <div class="about">
+    <div class="about-text reveal">
+      <p class="section-label">What is Tranquilo?</p>
+      <h2>Mental health should not be a <em>luxury.</em></h2>
+      <p>Tranquilo is your personal space for relaxation, focus, and mental clarity. Designed to help you unwind in a fast-paced world, the app offers soothing sounds, guided breathing exercises, and calming experiences that reduce stress and improve your mood.</p>
+      <p>Whether you're trying to sleep better, stay focused while working, or simply take a mindful break — Tranquilo adapts to your needs. Build healthy habits, manage anxiety, and bring balance back into your daily routine.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-card">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Core wellness features</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-num">Free</div>
+        <div class="stat-label">No subscriptions or hidden costs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Sessions, anytime anywhere</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Deep breath is all it takes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features">
+  <div class="features-header reveal">
+    <p class="section-label">What's inside</p>
+    <h2>Everything you need to <em>find your calm</em></h2>
+  </div>
+  <div class="features-grid">
+
+    <div class="feature-card reveal">
+      <span class="feature-num">01</span>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA15E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/>
+        </svg>
+      </div>
+      <h3>Armenian Poetry Listening</h3>
+      <p>Immerse yourself in cultural connection through dedicated Armenian poetry audio sessions. Built-in timers automatically stop playback and close the app to save your battery.</p>
+      <div class="feature-tags">
+        <span class="feature-tag">Audio</span>
+        <span class="feature-tag">Culture</span>
+        <span class="feature-tag">Timer</span>
+      </div>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-num">02</span>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA15E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+      </div>
+      <h3>Breathing Exercises</h3>
+      <p>Guided breathing techniques that help you manage stress responses in real time, improve focus and mental clarity, and activate your body's natural calm reflex.</p>
+      <div class="feature-tags">
+        <span class="feature-tag">Guided</span>
+        <span class="feature-tag">Mindfulness</span>
+        <span class="feature-tag">Focus</span>
+      </div>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-num">03</span>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA15E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </div>
+      <h3>Stress & Anxiety Education</h3>
+      <p>Short podcasts, audio lessons on stress science, and bite-sized daily lessons you can engage with in just a few minutes — perfect for commutes or short breaks.</p>
+      <div class="feature-tags">
+        <span class="feature-tag">Podcasts</span>
+        <span class="feature-tag">Education</span>
+        <span class="feature-tag">Daily</span>
+      </div>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-num">04</span>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA15E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </div>
+      <h3>Sleep Mode & Mood Tracking</h3>
+      <p>Relaxing sounds that fade naturally to ease your mind into sleep, plus a one-tap mood logger to track your emotional patterns and visualize your progress over time.</p>
+      <div class="feature-tags">
+        <span class="feature-tag">Sleep</span>
+        <span class="feature-tag">Mood Log</span>
+        <span class="feature-tag">Trends</span>
+      </div>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-num">05</span>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA15E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <h3>CalmCoins & Leaderboard</h3>
+      <p>Earn CalmCoins by completing breathing exercises, daily check-ins, and listening sessions. Compare your progress on the leaderboard and stay motivated through friendly competition.</p>
+      <div class="feature-tags">
+        <span class="feature-tag">Gamification</span>
+        <span class="feature-tag">Streaks</span>
+        <span class="feature-tag">Rewards</span>
+      </div>
+    </div>
+
+    <div class="feature-card reveal">
+      <span class="feature-num">06</span>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#DDA15E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+        </svg>
+      </div>
+      <h3>Schulte Table</h3>
+      <p>A classic cognitive training grid that improves speed and concentration. Numbers are shuffled each session to prevent memorization, training your attention and accuracy.</p>
+      <div class="feature-tags">
+        <span class="feature-tag">Focus</span>
+        <span class="feature-tag">Cognitive</span>
+        <span class="feature-tag">Training</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how">
+    <div class="how-header reveal">
+      <p class="section-label">Getting started</p>
+      <h2>Simple from the first breath</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Download the APK</h3>
+          <p>Tap the download button and install the Tranquilo APK directly on your Android device. Free, with no subscriptions or hidden costs — ever.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Create your profile</h3>
+          <p>Set up your personal space in seconds. Tell Tranquilo what you're here for — sleep, focus, stress relief, or all three — and the app adapts to you.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Start your first session</h3>
+          <p>Choose from breathing exercises, ambient sounds, poetry, or the Schulte table. Your first calm moment is just one tap away.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Build the habit, earn CalmCoins</h3>
+          <p>Log your mood daily, maintain your streak, and collect CalmCoins as you go. Wellness becomes something you look forward to.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <p class="section-label">Download Now</p>
+  <h2>One deep breath.<br/><em>That's where it starts.</em></h2>
+  <p>Tranquilo is free, for Android. No account required to get started. Just download, open, and breathe.</p>
+  <a href="https://www.dropbox.com/scl/fi/t2i1hdzg1o9lihc56wdy6/Tranquilo.apk?rlkey=vfedwl0rucpyxfl76k4mg202i&st=ykf4oltg&dl=1" class="btn-download">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.523 15.341l-.937-.937a5.498 5.498 0 001.16-3.404A5.5 5.5 0 0012.25 6a5.5 5.5 0 00-5.496 5 5.499 5.499 0 001.16 3.404l-.938.937A7 7 0 015.25 11a7 7 0 017-7 7 7 0 017 7 7 7 0 01-1.727 4.341zM12 22l-5-5h10l-5 5zm-1-8V8h2v6h-2z"/></svg>
+    Download Tranquilo.apk
+  </a>
+  <p class="android-note">Android only · Free · No subscriptions</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Tranquilo</div>
+      <p>Your personal space for relaxation, focus, and mental clarity.</p>
+    </div>
+    <div class="footer-quote">"Take a breath. Relax. Stay Tranquilo."</div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Tranquilo · Ashot Mkrtchyan</span>
+    <span>Android only · Free · No subscriptions</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
